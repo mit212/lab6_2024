@@ -1,4 +1,4 @@
-# Lab 5: Sensors
+# Lab 6: Mobile Robot I
 
 2.12/2.120 Intro to Robotics  
 Spring 2024[^1]
