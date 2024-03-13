@@ -21,4 +21,13 @@
 #define ENCODER4_A_PIN 16
 #define ENCODER4_B_PIN 15
 
-#endif
+//IMU pins
+#define BNO08X_CS 12
+#define BNO08X_INT 13
+#define BNO08X_RESET 14
+
+//joystick pins
+#define X_PIN A0
+#define Y_PIN A1
+
+#endif // PINOUT_H

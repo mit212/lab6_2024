@@ -3,13 +3,11 @@
 // https://randomnerdtutorials.com/esp-now-esp32-arduino-ide/
 
 void setup(){
-  Serial.begin(115200);
+  Serial.begin();
   WiFi.mode(WIFI_MODE_STA);
-  
 }
  
-void loop(){
-  
+void loop(){  
   Serial.println(WiFi.macAddress());
   delay(250);
 }
