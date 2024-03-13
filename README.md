@@ -12,9 +12,9 @@ Spring 2024[^1]
     - [1.1.2 Get MAC Address](#112-get-mac-address)
     - [1.1.3 Validate Mobile Robot](#113-validate-mobile-robot)
     - [1.1.4 Validate Encoders](#114-validate-encoders)
-  - [1.2 Read Joystick](#12-read-joystick)
-    - [1.2.1 Update Setpoint](#121-update-setpoint)
-    - [1.2.2](#122)
+  - [1.2 Joystick](#12-joystick)
+    - [1.2.1 Read Joystick](#121-read-joystick)
+    - [1.2.2 Update Setpoint](#122-update-setpoint)
 - [2 Controller Subteam](#2-controller-subteam)
   - [2.1 Validation](#21-validation)
     - [2.1.1 Validate Microcontroller](#211-validate-microcontroller)
@@ -52,14 +52,14 @@ Run `test_basic/motor_drive_test.cpp`. You should see each motor driving at two 
 #### 1.1.4 Validate Encoders
 Run `test_basic/encoder_test.cpp`. You should see each motor's position and velocity being printed to the Serial monitor. Make sure that E1 is front left, E2 is front right, E3 is back left, and E4 is back right.
 
-### 1.2 Read Joystick
+### 1.2 Joystick
 We will assume the controller subteam has successfully sent joystick data to your microcontroller. 
 
-#### 1.2.1 Update Setpoint
+#### 1.2.1 Read Joystick
 
 In `robot/robot_main.cpp`, complete `forward` and `turn` such that `forward` maps reflects `Y` joystick readings and `turn` reflects `X` joystick readings.
 
-#### 1.2.2 
+#### 1.2.2 Update Setpoint
 
 In `robot/robot_drive.cpp`, complete `updateSetpoint` such that the each of the motor's setpoints are updated according to `forward` and `turn`.
 
