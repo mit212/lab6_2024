@@ -1,4 +1,4 @@
-# Lab 5: Sensors
+# Lab 6: Mobile Robot I
 
 2.12/2.120 Intro to Robotics  
 Spring 2024[^1]
@@ -6,26 +6,17 @@ Spring 2024[^1]
 <details>
   <summary>Table of Contents</summary>
 
-- [1 Microcontroller](#1-microcontroller)
-  - [1.1 Validate Microcontroller](#11-validate-microcontroller)
-  - [1.2 Microcontroller Pinout](#12-microcontroller-pinout)
-- [2 Wiring and Reading Sensors](#2-wiring-and-reading-sensors)
-  - [2.1 Potentiometer](#21-potentiometer)
-    - [2.1.1 Wiring](#211-wiring)
-    - [2.1.2 Coding](#212-coding)
-  - [2.2 Button](#22-button)
-    - [2.2.1 Wiring](#221-wiring)
-    - [2.2.2 Coding](#222-coding)
-  - [2.3 Time-of-Flight](#23-time-of-flight)
-    - [2.3.1 Wiring](#231-wiring)
-    - [2.3.2 Coding](#232-coding)
-  - [2.4 IMU](#24-imu)
-    - [2.4.1 Wiring](#241-wiring)
-    - [2.4.2 Coding](#242-coding)
-- [3 Sensor-controlled Motor](#3-sensor-controlled-motor)
-  - [3.1 Validate Motors](#31-validate-motors)
-  - [3.2 Validate Encoders](#32-validate-encoders)
-  - [3.3 Sensor Integration](#33-sensor-integration)
+- [1 Mobile Robot](#1-mobile-robot)
+  - [1.1 Validation](#11-validation)
+    - [1.1.1 Validate Microcontroller](#111-validate-microcontroller)
+    - [1.1.1 Validate Mobile Robot](#111-validate-mobile-robot)
+  - [1.2 Read Joystick Data](#12-read-joystick-data)
+  - [1.3 Drive Robot](#13-drive-robot)
+- [2 Controller](#2-controller)
+  - [2.1 Validation](#21-validation)
+    - [2.1.1 Validate Microcontroller](#211-validate-microcontroller)
+    - [2.2 Read Joystick](#22-read-joystick)
+  - [2.3 Send Joystick Data](#23-send-joystick-data)
 - [4 Free Exploration](#4-free-exploration)
 - [4.1 Wireless Communication](#41-wireless-communication)
   - [4.1.1 Wiring](#411-wiring)
@@ -39,10 +30,14 @@ Spring 2024[^1]
 
 </details>
 
-## 1 Microcontroller
+In this lab, you will be working together as a team to drive your mobile robot! First, you will split into two subteams, one for mobile robot and one for controller. Section 1 will be for the mobile robot team and Section 2 will be for the controller. Afterwards, you will recombine to practice drive your mobile robot around!
+
+## 1 Mobile Robot
+
+### 1.1 Validation
 Estimated time of completion: 5 min
 
-### 1.1 Validate Microcontroller
+#### 1.1.1 Validate Microcontroller
 
 Clone this repository and run `robot/blink_test.cpp`. You should see the onboard LED change colors! 
 
@@ -53,150 +48,29 @@ https://github.com/mit212/lab1_2024?tab=readme-ov-file#31-git-clone).
 
 </details>
 
-### 1.2 Microcontroller Pinout
+#### 1.1.1 Validate Mobile Robot
 
-Refer to the pinout diagram [here](https://esp32s3.com/pros3.html#img1) when choosing pins for sensors, motors, and encoders.
+### 1.2 Read Joystick Data
 
-<p align="center">
-  <img src="./.images/mcu_pinouts.jpeg" height="400" />
-</p>
+### 1.3 Drive Robot
 
-The pin numbers in code are usually defined either in `include/pinout.h` or through `#define` statements at the beginning of the test code. In this lab, **you are free to use any pins as long as they are the right type and you update the code to match your chosen pins**.
+## 2 Controller
 
-Feel free to clarify with staff if you are unsure what the labels mean! A printout of this diagram has also been provided to you.
+### 2.1 Validation
+Estimated time of completion: 5 min
 
-## 2 Wiring and Reading Sensors
-Estimated time of completion: 40 min
+#### 2.1.1 Validate Microcontroller
 
-In this section, you will wire and code each sensor by following Adafruit tutorials. The instructions are intentionally vague to prepare you incase you use other sensors for the final project! Don't be afraid to ask the lab staff any questions you might have.
+Clone this repository and run `robot/blink_test.cpp`. You should see the onboard LED change colors! 
 
-Please keep the sensors on the breadboard as you move through this section.
-
-### 2.1 Potentiometer
-
-#### 2.1.1 Wiring
-
-Wire the potentiometer onto your breadboard. Refer to [this Adafruit page](https://learn.adafruit.com/make-it-change-potentiometers/connections) as an example.
-
-#### 2.1.2 Coding
-
-Fill in `test_sensors/pot_test.cpp` with test code to read your potentiometer. Refer to [this Adafruit page](https://learn.adafruit.com/make-it-change-potentiometers/arduino#display-to-serial-3001622) as an example.
-
-Necessary changes:
-- Add `#include <Arduino.h>` to the beginning of your file.
-
-### 2.2 Button
-
-#### 2.2.1 Wiring
-
-Wire the button, LED, and resistor onto your breadboard. Refer to [this Adafruit page](https://learn.adafruit.com/adafruit-arduino-lesson-6-digital-inputs/breadboard-layout) as an example. You only need one button.
-
-#### 2.2.2 Coding
-
-Fill in `test_sensors/button_test.cpp` with test code to read your button. For this lab, we will be using the `Bounce2` library to filter out undesired state changes (debouncing).
-
-<details>
-  <summary><i>How do I import a library in PlatformIO?</i></summary>
-
-  1. Click the PIO Icon on the left side of the screen.
-      <p align="center">
-        <img src="./.images/platformio_extension.png" height="300" />  
-      </p>
-
-  2. Go to `PIO Home/Libraries`.
-      <p align="center">
-        <img src="./.images/platformio_libraries.png" height="350" />  
-      </p>
-
-  3. Search for and click the `Bounce2` library.
-      <p align="center">
-        <img src="./.images/platformio_bounce.png" height="350" />  
-      </p>
-
-  4. Click the "Add to Project" button. **Don't click Add in the pop up!** Instead, copy the text in the topmost textbox.
-      <p align="center">
-        <img src="./.images/platformio_import.png" height="350" />  
-      </p>
-
-  5. Exit out of the pop up by clicking the X or the "Cancel" button.
-  6. Navigate back to see your files and directories by clicking the topmost icon on the left side of the screen. 
-  7. Open the `platformio.ini` file, likely the second to the last file, above `README.md`.
-  8. Paste the text you copied under the `TODO`, in the `lib_deps` section of `[env]`. 
-  9. Save the file. You should see PlatformIO reprocess the imported libraries.
+<details> <summary> <i> Forget how to clone? </i> </summary>
+Please refer to the [instructions from Lab 1](
+https://github.com/mit212/lab1_2024?tab=readme-ov-file#31-git-clone).
 </details>
 
-<details>
-  <summary><i>Where do I find demo code?</i></summary>
+#### 2.2 Read Joystick
 
- 1. Navigate back to the `Bounce2` library. 
- 2. You can select an example from the dropdown. For the button, we will use `bounce_basic`.
-    <p align="center">
-       <img src="./.images/platformio_example.png" height="350" />  
-     </p>
-
- 3. Copy the code into `test_sensors/button_test.cpp`.
-
-</details>
-
-### 2.3 Time-of-Flight
-
-#### 2.3.1 Wiring
-
-Wire the ToF sensor onto your breadboard. We will be using the I2C protocol.
-
-If you are using the VL6180X, refer to [this Adafruit page](https://learn.adafruit.com/adafruit-vl6180x-time-of-flight-micro-lidar-distance-sensor-breakout/wiring-and-test#wiring-3060229) as an example.
-
-If you are using the VL53L0X, refer to [this Adafruit page](https://learn.adafruit.com/adafruit-vl53l0x-micro-lidar-distance-sensor-breakout/arduino-code#step-2593375) as an example.
-
-#### 2.3.2 Coding
-
-Fill in `test_sensors/tof_test.cpp` with test code to read your time-of-flight sensor. Similar to the button, you will have to import the ToF library and refer to the demo code.
-
-If you are using the VL6180X, refer to [this Adafruit page](https://learn.adafruit.com/adafruit-vl6180x-time-of-flight-micro-lidar-distance-sensor-breakout/wiring-and-test#install-adafruit-vl6180x-2980766) as an example. The name of the library is `Adafruit_VL6180X`, and the demo code is called `vl6180x`.
-
-If you are using the VL53L0X, refer to [this Adafruit page](https://learn.adafruit.com/adafruit-vl53l0x-micro-lidar-distance-sensor-breakout/arduino-code#download-adafruit-vl53l0x-2593377) as an example. The name of the library is `Adafruit_VL53L0X`, and the demo code is called `vl53l0x`.
-
-### 2.4 IMU
-
-#### 2.4.1 Wiring 
-
-Wire the IMU onto your breadboard. Refer to [this Adafruit page](https://learn.adafruit.com/adafruit-9-dof-orientation-imu-fusion-breakout-bno085/arduino#spi-wiring-3072345) as an example. We will use the SPI protocol. `SPI MISO` is equivalent to `SPI MI` and `SPI MOSI` is equivalent to `SPI MO`.
-
-#### 2.4.2 Coding
-
-Fill in `test_sensors/imu_test.cpp` with test code to read your IMU. We have already imported the IMU library for you. However, you will still have to look it up to refer to the demo code. The name of the library is `Adafruit BNO08x`, and the demo code is called `quaternion_yaw_pitch_roll`.
-
-Necessary changes:
-- Comment out line 17 `#define BNO08X_RESET -1` and uncomment line 15 `#define BNO08X_RESET 5`
-- Comment out line 52 `if (!bno08x.begin_I2C()) {` and uncomment line 54 `if (!bno08x.begin_SPI(BNO08X_CS, BNO08X_INT)) {`
-
-## 3 Sensor-controlled Motor 
-Estimated time of completion: 15 min
-
-### 3.1 Validate Motors
-
-Push and hold either of the `M1A` and `M1B` buttons on the motor driver to see the wheel spin. Then, wire up the motor and run `test_code/motor_drive_test.cpp`. The wheel should spin in different directions with varied speeds.
-
-### 3.2 Validate Encoders
-
-Wire up the encoder and run `test_code/encoder_test.cpp`. Open the Serial Monitor and confirm that both the direction and the magnitude make sense.
-
-### 3.3 Sensor Integration
-
-We now want to use one of the sensors to dictate a variable involved in `test_code/motor_position_control.cpp`. For example, you can use the potentiometer reading to be `setpoint`. Running `test_code/motor_position_control.cpp` as is should make the motor oscillate back and forth.
-
-Incorporate sensor reading code from the tests in the previous section into `test_code/motor_position_control.cpp`. You may have to map or convert your sensor reading into reasonable values for the variable you choose.
-
-You are free to use any sensor you want. You can even use multiple sensors! Consider sensor/s that you think will be useful for the final project. 
-
-<details><summary><i> Getting an insanely large control effort??</i></summary>
-
-If your control effort looks like it's 100 digits long, comment out any `delay` calls in the `loop` function. The `delay` might be messing with the timing of `EVERY_N_MICROS`.
-</details>
-
-| :white_check_mark: CHECKOFF 1 :white_check_mark:   |
-|:---------------------------------------------------|
-| Demonstrate your new `test_code/motor_position_control.cpp` to a TA or LA. |
+### 2.3 Send Joystick Data
 
 ## 4 Free Exploration
 Estimated time of completion: now until the end of lab
