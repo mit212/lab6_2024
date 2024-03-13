@@ -1,15 +1,16 @@
 #ifndef DRIVE_H
 #define DRIVE_H
 
-#define NUM_MOTORS 4
+#include "wireless.h"
 
-#define Kp 0.5
-#define Ki 0
+#define Kp 0.25
+#define Ki 0.01
 #define Kd 0
 #define tau 0.1
 
-void setupDrive();
-void updateSetpoints(double forward, double turn);
-void updateLeadLags();
+#define MAX_FORWARD 6
+#define MAX_TURN 3
+
+extern joystickData joystick;
 
 #endif // DRIVE_H

@@ -2,70 +2,36 @@
 #include "pinout.h"
 #include "MotorDriver.h"
 
+#define NUM_SPEEDS 8
+
 #define DELAY 500 // Delay between motor movements in milliseconds
 
 // Create an instance of the MotorDriver class
-MotorDriver motor1(A_DIR1, A_PWM1, 0);
-MotorDriver motor2(A_DIR2, A_PWM2, 1);
-MotorDriver motor3(B_DIR1, B_PWM1, 2);
-MotorDriver motor4(B_DIR2, B_PWM2, 3);
+MotorDriver motors[NUM_MOTORS] = { {A_DIR1, A_PWM1, 0}, {A_DIR2, A_PWM2, 1},
+                                   {B_DIR1, B_PWM1, 2}, {B_DIR2, B_PWM2, 3} };
+
+const double speeds[NUM_SPEEDS] = {1.0, 0.0, 0.5, 0.0, -1.0, 0.0, -0.5, 0.0};
+const char* description[NUM_SPEEDS] = {"Moving motor %d forward at full speed", "Stopping %d",
+                                       "Moving motor %d forward at half speed", "Stopping %d",
+                                       "Moving motor %d backward at full speed", "Stopping %d",
+                                       "Moving motor %d backward at half speed", "Stopping %d",};
 
 void setup() {
     // Initialize serial communication
     Serial.begin();
 
     // Setup the motor driver
-    motor1.setup();
-    motor2.setup();
-    motor3.setup();
-    motor4.setup();
-}
-
-void testMotor(MotorDriver motor) {
-    // Move the motor forward at full speed
-    Serial.println("Moving Forward at full speed");
-    motor.drive(1.0); // 100% duty cycle
-    delay(DELAY);
-
-    // Stop the motor
-    Serial.println("Stopping");
-    motor.drive(0.0); // 0% duty cycle
-    delay(DELAY);
-
-    // Move the motor forward at half speed
-    Serial.println("Moving Forward at half speed");
-    motor.drive(0.5); // 50% duty cycle
-    delay(DELAY);
-
-    // Stop the motor
-    Serial.println("Stopping");
-    motor.drive(0.0); // 0% duty cycle
-    delay(DELAY);
-
-    // Move the motor backward at full speed
-    Serial.println("Moving Backward at full speed");
-    motor.drive(-1.0); // -100% duty cycle (backward)
-    delay(DELAY);
-
-    // Stop the motor
-    Serial.println("Stopping");
-    motor.drive(0.0); // 0% duty cycle
-    delay(DELAY);
-
-    // Move the motor backward at half speed
-    Serial.println("Moving Backward at half speed");
-    motor.drive(-0.5); // -50% duty cycle (backward)
-    delay(DELAY);
-
-    // Stop the motor
-    Serial.println("Stopping");
-    motor.drive(0.0); // 0% duty cycle
-    delay(DELAY);
+    for (uint8_t i = 0; i < NUM_MOTORS; i++)
+        motors[i].setup();
 }
 
 void loop() {
-    testMotor(motor1);
-    testMotor(motor2);
-    testMotor(motor3);
-    testMotor(motor4);
+    for (uint8_t i = 0; i < NUM_MOTORS; i++) {
+        for (uint8_t j = 0; j < NUM_SPEEDS; j++) {
+            Serial.printf(description[j], i+1);
+            Serial.println();
+            motors[i].drive(speeds[j]);
+            delay(DELAY);
+        }
+    }
 }

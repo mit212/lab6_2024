@@ -6,14 +6,13 @@
 #include "pinout.h"
 #include "util.h"
 
-#define RESOLUTION 5
-
 // TODO: Replace with the mac address of the robot.
 uint8_t broadcastAddress[] = {0xEC, 0xDA, 0x3B, 0x41, 0xA0, 0x38};
 
 joystickData joystick;
 uint16_t x = 0, y = 0;
 uint16_t xPrev = 0, yPrev = 0;
+double alpha = 0.75;
 
 UMS3 ums3;
 
@@ -71,30 +70,19 @@ void setup(void){
 }
 
 void loop(){
-
   EVERY_N_MILLIS(50) {
 
     x = analogRead(X_PIN);
     y = analogRead(Y_PIN);
 
-    bool update = false;
-    if (abs(x - xPrev) > RESOLUTION) {
-      xPrev = x;
-      update = true;
-    }
-    if (abs(y - yPrev) > RESOLUTION) {
-      yPrev = y;
-      update = true;
-    }
+    joystick.x = alpha * x + (1-alpha) * xPrev;
+    joystick.y = alpha * y + (1-alpha) * yPrev;
     
-    if (update) {
-      joystick.x = xPrev;
-      joystick.y = yPrev;
-      ums3.setPixelColor(xPrev/16, 0, yPrev/16);
-
-      // Send message via ESP-NOW
-      esp_err_t result = esp_now_send(broadcastAddress, (uint8_t *) &joystick, sizeof(joystick));
-    }    
+    xPrev = joystick.x;
+    yPrev = joystick.y;
+    ums3.setPixelColor(joystick.x/16, 0, joystick.y/16);
+    
+    // Send message via ESP-NOW
+    esp_err_t result = esp_now_send(broadcastAddress, (uint8_t *) &joystick, sizeof(joystick));    
   }
-
 }
