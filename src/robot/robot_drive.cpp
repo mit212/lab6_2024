@@ -1,7 +1,7 @@
 #include <Arduino.h>
 #include "pinout.h"
 #include "MotorDriver.h"
-#include "SimpleFilters.h"
+#include "PID.h"
 #include "EncoderVelocity.h"
 #include "robot_drive.h"
 
@@ -13,8 +13,8 @@ EncoderVelocity encoders[NUM_MOTORS] = { {ENCODER1_A_PIN, ENCODER1_B_PIN, CPR_31
                                          {ENCODER3_A_PIN, ENCODER3_B_PIN, CPR_312_RPM, 0.2}, 
                                          {ENCODER4_A_PIN, ENCODER4_B_PIN, CPR_312_RPM, 0.2} };
 
-LeadLagFilter leadLags[NUM_MOTORS] = { {alpha, Td, Ti}, {alpha, Td, Ti}, 
-                                       {alpha, Td, Ti}, {alpha, Td, Ti} };
+PID pids[NUM_MOTORS] = { {Kp, Ki, Kd, 0, tau, false}, {Kp, Ki, Kd, 0, tau, false}, 
+                         {Kp, Ki, Kd, 0, tau, false}, {Kp, Ki, Kd, 0, tau, false} };
 
 double setpoints[NUM_MOTORS] = {0, 0, 0, 0};
 double velocities[NUM_MOTORS] = {0, 0, 0, 0};
@@ -35,7 +35,7 @@ void updateSetpoints(double forward, double turn) {
 void updateLeadLags() {
     for (uint8_t i = 0; i < NUM_MOTORS; i++) {
         velocities[i] = pow(-1, i) * encoders[i].getVelocity();
-        controlEfforts[i] = Kp * leadLags[i].calculate(setpoints[i] - velocities[i]);
+        controlEfforts[i] = pids[i].calculateParallel(velocities[i], setpoints[i]);
         motors[i].drive(controlEfforts[i]);
     }
 }

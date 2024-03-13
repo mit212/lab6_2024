@@ -3,10 +3,10 @@
 
 #define NUM_MOTORS 4
 
-#define Ti 0.0183
-#define Td 0.0021
-#define Kp 0.25
-#define alpha 10
+#define Kp 0.5
+#define Ki 0
+#define Kd 0
+#define tau 0.1
 
 void setupDrive();
 void updateSetpoints(double forward, double turn);
