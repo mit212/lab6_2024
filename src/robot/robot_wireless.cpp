@@ -10,6 +10,7 @@ bool freshWirelessData = false;
 void onDataRecv(const uint8_t * mac, const uint8_t *incomingData, int len) {
     memcpy(&joystick, incomingData, sizeof(joystick));
     freshWirelessData = true;
+    // Serial.printf("JOYSTICK: X %d   Y %d\n", joystick.x, joystick.y);
 }
 
 void setupWireless(){

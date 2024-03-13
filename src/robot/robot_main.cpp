@@ -17,23 +17,27 @@ double turn = 0;
 void loop() {
 
     // Update setpoint at 2kHz
-    EVERY_N_MICROS(500) {
+    // Update setpoint at 50Hz
+    EVERY_N_MILLIS(20) {
         if (freshWirelessData) {
-            forward = mapDouble(joystick.y, 0, 4096, -MAX_FORWARD, MAX_FORWARD);
-            turn = mapDouble(joystick.x, 0, 4096, -MAX_TURN, MAX_TURN);
+            forward = mapDouble(joystick.y, 0.0, 4096.0, -MAX_FORWARD, MAX_FORWARD);
+            turn = mapDouble(joystick.x, 0.0, 4096.0, -MAX_TURN, MAX_TURN);
             updateSetpoints(forward, turn);
         }
+        // Serial.printf("Forward: %.2f, Turn: %.2f \n",
+        //             forward, turn);
     }
 
-    //update PID at 5khz
-    EVERY_N_MICROS(200) {
+    //update PID at 5kHz
+    //update PID at 200Hz
+    EVERY_N_MILLIS(5) {
         updateLeadLags();
     }
 
-    // Print values at 50Hz
-    EVERY_N_MILLIS(20) {
-            Serial.printf("Forward: %.2f, Turn: %.2f \n",
-                          joystick.x, joystick.y);
-    }
+    // // Print values at 20Hz
+    // EVERY_N_MILLIS(50) {
+    //     Serial.printf("Forward: %.2f, Turn: %.2f \n",
+    //                 forward, turn);
+    // }
   
 }

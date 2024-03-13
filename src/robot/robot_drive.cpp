@@ -6,7 +6,7 @@
 #include "robot_drive.h"
 
 MotorDriver motors[NUM_MOTORS] = { {A_DIR1, A_PWM1, 0}, {A_DIR2, A_PWM2, 1},
-                                   {B_DIR1, A_PWM1, 2}, {B_DIR2, A_PWM2, 3} };
+                                   {B_DIR1, B_PWM1, 2}, {B_DIR2, B_PWM2, 3} };
 
 EncoderVelocity encoders[NUM_MOTORS] = { {ENCODER1_A_PIN, ENCODER1_B_PIN, CPR_312_RPM, 0.2},
                                          {ENCODER2_A_PIN, ENCODER2_B_PIN, CPR_312_RPM, 0.2},
@@ -34,7 +34,7 @@ void updateSetpoints(double forward, double turn) {
 
 void updateLeadLags() {
     for (uint8_t i = 0; i < NUM_MOTORS; i++) {
-        velocities[i] = encoders[i].getVelocity();
+        velocities[i] = pow(-1, i) * encoders[i].getVelocity();
         controlEfforts[i] = Kp * leadLags[i].calculate(setpoints[i] - velocities[i]);
         motors[i].drive(controlEfforts[i]);
     }
