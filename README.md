@@ -89,6 +89,9 @@ You first need to divide your setup into a *sender* and a *receiver*. In our cas
 
 Run `get_mac.cpp` on the *receiver* to get the MAC address of the *receiver* microcontroller. Then, replace `broadcastAddress` in `wireless/esp_now_sender.cpp` to be that MAC address. Run `wireless/esp_now_sender.cpp` on the *sender* and `wireless/esp_now_receiver.cpp` on the *receiver*. Keep the *receiver* connected to your machine and open the Serial Monitor. 
 
+<!-- Add note on EC:DA:3B:41:A0:38 -->
+
+
 Confirm that the data received, as printed on the Serial Monitor, is reasonable given the data sent. Hint: Refer to lines `60` to `63` in `wireless/esp_now_sender.cpp` to see what data is being sent.
 
 ### 4.1.3 Wireless Sensor-controlled Motor 

@@ -3,12 +3,12 @@
 
 //motor pins
 #define A_DIR1 39
-#define A_PWM1 40
-#define A_DIR2 41
+#define A_PWM1 41
+#define A_DIR2 40
 #define A_PWM2 42
 #define B_DIR1 34
-#define B_PWM1 3
-#define B_DIR2 7
+#define B_PWM1 7
+#define B_DIR2 3
 #define B_PWM2 6
 
 //encoder pins

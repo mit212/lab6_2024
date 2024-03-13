@@ -12,15 +12,7 @@ struct joystickData {
     uint16_t y;
 } ;
 
-struct robotData {
-    float angle;
-    float distance;
-    float controlEffort;
-    uint millis;
-} ;
-
 extern joystickData joystick;
-extern robotData robot;
 extern bool freshWirelessData;
 
 #endif // WIRELESS_H

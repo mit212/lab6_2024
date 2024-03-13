@@ -4,6 +4,8 @@
 
 #define PRINT_DELAY 50
 
+// TODO: THIS TEST IS BROKEN? 
+
 ESP32Encoder encoder1;
 ESP32Encoder encoder2;
 ESP32Encoder encoder3;
@@ -23,7 +25,7 @@ void setup(){
 
 void loop(){
 	// Loop and read the count
-	Serial.printf("COUNTS: E1 %d   E2 %d   E3 %d   E4 %d\n" , 
+	Serial.printf("COUNTS: E1 %d   E2 %d   E3 %d   E4 %d\n", 
 					encoder1.getCount(), encoder2.getCount(),
 					encoder3.getCount(), encoder4.getCount());
 	delay(PRINT_DELAY);
