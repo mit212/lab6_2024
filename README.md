@@ -32,11 +32,17 @@ In this lab, you will be working together as a small team to drive a mobile robo
 
 Clone this repository.
 
+In past labs, we asked you to move files into the `robot/` directory in order to run them. This is because we have set the default environment in PlatformIO to be `robot`. Today, we will teach you how to change environments so that you can separate code for the mobile robot and the controller.
 
+Click the button at the bottom of the screen that says `Default (lab6_2024)`. Then, select `env:joystick`. PlatformIO should reconfigure the project. Once it finishes, you can now click the upload button as usual and it should compile and upload code in the `joystick/` directory!
 
-you may choose to keep one laptop connected to one or the other so no need keep switch environment.
+<p align="center">
+<img src="./.images/robot_env1.png" alt="drawing" width="600"/>
+</p>
 
-remember to switch for parts, we will not remind 
+To switch back, you can repeat the process above but select `env:robot`.
+
+For this lab, we will **not** remind you to switch environments every time we switch between the controller and the mobile robot. You should do this automatically. Since you are working in a team, it may be easier to keep one laptop connected to the controller and the other connected to the mobile robot, so you don't have to switch environments.
 
 ## 2 Controller 
 Estimated time of completion: 10 min
