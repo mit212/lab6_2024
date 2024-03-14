@@ -9,6 +9,8 @@
 // TODO: Replace with the mac address of the robot.
 uint8_t broadcastAddress[] = {0xEC, 0xDA, 0x3B, 0x41, 0xA0, 0x38};
 
+// Note: You do not need to define struct joystickData.
+// joystickData has been defined in wireless.h
 joystickData joystick;
 
 // TODO: Initialize any other global variable/s.
@@ -37,6 +39,8 @@ void loop(){
 
     // TODO: Send message via ESP-NOW.
 
+    // Note: Do not place a delay here. Everything in EVERY_N_MILLIS(50) 
+    // already runs every 50ms, so placing a delay will only lengthen 
+    // the read/send cycle period.
   }
-
 }

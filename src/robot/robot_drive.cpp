@@ -7,7 +7,7 @@
 #include "robot_drive.h"
 
 // TODO: Initialize motors, encoders, and PID controllers.
-//  Kp, Ki, Kd, tau have all been defined in robot_drive.h, so you may use them here.
+// Kp, Ki, Kd, tau have all been defined in robot_drive.h, so you may use them here.
 // Hint: Each motor-encoder pair needs its own PID controller.
 
 // TODO: Initialize setpoints, velocities, and control efforts.
@@ -34,6 +34,7 @@ void loop() {
             // dependent on joystick.x and joystick.y.
 
         }
+        // Note: Do not place a delay here.
     }
 
     // Update PID at 200Hz
@@ -44,6 +45,9 @@ void loop() {
         // Hint: Some motors are wired to drive in the opposite direction 
         // as motor 1. You may need to negate controlEffort.
 
+
+
+        // Note: Do not place a delay here.
     }
 
     // Print values at 20Hz
