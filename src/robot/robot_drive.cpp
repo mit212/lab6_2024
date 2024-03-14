@@ -41,8 +41,8 @@ void loop() {
         // TODO: For each motor, get encoder velocity, calculate control effort,
         // and then drive the motor using control effort.
         // Use motor_velocity_control.cpp as a reference.
-        // Hint: Some motors are set up to drive in the opposite direction 
-        // as motor 1. You may need to negate encoder velocity.
+        // Hint: Some motors are wired to drive in the opposite direction 
+        // as motor 1. You may need to negate controlEffort.
 
     }
 

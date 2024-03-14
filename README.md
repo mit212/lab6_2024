@@ -139,7 +139,7 @@ Run `test_basic/encoder_test.cpp` and open the Serial Monitor. You should see ea
 
 Fill in `robot/robot_drive.cpp` to implement velocity control on all motors. Define the setpoints to all be `2` rad/s. Remember, each motor needs its own PID controller! You may use `test_basic/motor_drive_test.cpp`, `test_basic/encoder_test.cpp`, and `test_basic/motor_velocity_control.cpp` as references.
 
-Hint: You may have to take the negative of `encoder.getVelocity()` for some motors since they are configured differently from motor 1.
+Hint: You may have to input the negative of `controlEffort` to `motor.drive()` for some motors since they are wired in the opposite way to motor 1.
 
 Run `robot/robot_drive.cpp` and `robot/robot_wireless.cpp` and confirm that all wheels spin at about `2` rad/s and in the direction that would make the mobile robot go forward.
 
