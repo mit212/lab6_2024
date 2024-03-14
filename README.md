@@ -131,6 +131,10 @@ With wireless communications set up, we can now focus on using controller inputs
 
 Run `test_basic/motor_drive_test.cpp`. You should see each motor drive at two different speeds, in two different directions, one-by-one. Confirm that the wheels spin in the following order: front-left, front-right, back-left, and back-right. 
 
+<details> <summary> <i> Wheels not spinning? </i> </summary> 
+
+Try changing `Serial.begin();` to `Serial.begin(115200);`. Serial may have trouble initializing without an explicit baud rate.
+
 ### 4.2 Encoder Validation
 
 Run `test_basic/encoder_test.cpp` and open the Serial Monitor. You should see each motor's position and velocity printed. Make sure that E1 is front-left, E2 is front-right, E3 is back-left, and E4 is back-right. It is very important that the motors and encoders are in the same order!
