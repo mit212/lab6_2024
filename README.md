@@ -56,7 +56,7 @@ Run `test_basic/blink_test.cpp`. You should see the onboard LED change colors!
 
 ### 2.2 Joystick Wiring
 
-Wire the joystick and update `include/pinout.h` if needed. We recommend you wire `U/D` to `Y_PIN` and `L/R` to `X_PIN`. 
+If needed, wire the joystick and update `include/pinout.h`. We recommend you wire `U/D` to `Y_PIN` and `L/R` to `X_PIN`. 
 
 ### 2.3 Joystick Validation
 
