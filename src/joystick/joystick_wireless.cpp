@@ -10,79 +10,33 @@
 uint8_t broadcastAddress[] = {0xEC, 0xDA, 0x3B, 0x41, 0xA0, 0x38};
 
 joystickData joystick;
-uint16_t x = 0, y = 0;
-uint16_t xPrev = 0, yPrev = 0;
-double alpha = 0.75;
 
-UMS3 ums3;
+// TODO: Initialize any other global variable/s.
+// Hint: You only need one for your code to work at the bare minimum.
 
-esp_now_peer_info_t peerInfo;
-
-// callback when data is sent
-void OnDataSent(const uint8_t *mac_addr, esp_now_send_status_t status) {
-
-    bool success = status == ESP_NOW_SEND_SUCCESS ;
-    if (success) {
-      Serial.printf("Sent x:%d y:%d\n", joystick.x, joystick.y);
-    } else {
-      Serial.println("Failed");
-    }
-
-}
+// TODO: Define the callback function when data is sent.
+// Consider printing the data to Serial before sending.
 
 void setup(void){
-    Serial.begin();
+    // TODO: Initialize Serial communication.
 
-    //ESP_NOW Setup
-    // Set device as a Wi-Fi Station
-    WiFi.mode(WIFI_STA);
+    // TODO: Fill in code to set up ESP_NOW.
 
-    // Init ESP-NOW
-    if (esp_now_init() != ESP_OK) {
-      Serial.println("Error initializing ESP-NOW");
-      return;
-    }
+    // TODO: Initialize joystick pins as INPUT.
 
-    //Tell the microcontroller which functions to call when
-    //data is sent or received
-    esp_now_register_send_cb(OnDataSent);
-    
-    // Register peer
-    memcpy(peerInfo.peer_addr, broadcastAddress, 6);
-    peerInfo.channel = 0;  
-    peerInfo.encrypt = false;
-  
-    // Add peer        
-    if (esp_now_add_peer(&peerInfo) != ESP_OK){
-      Serial.println("Failed to add peer");
-      return;
-    }
-    // ESP-NOW Setup Complete
-
-    // Initialize analog pins
-    pinMode(X_PIN, INPUT);
-    pinMode(Y_PIN, INPUT);
-
-    // Start the LED
-    ums3.begin();
-    // Brightness is 0-255. We set it to 1/2 brightness here
-    ums3.setPixelBrightness(255/2);
 }
 
 void loop(){
+
+  // Read and send joystick data at 20Hz
   EVERY_N_MILLIS(50) {
 
-    x = analogRead(X_PIN);
-    y = analogRead(Y_PIN);
+    // TODO: Read data from joystick pins.
+    
+    // TODO: Populate joystick.x and joystick.y.
 
-    joystick.x = alpha * x + (1-alpha) * xPrev;
-    joystick.y = alpha * y + (1-alpha) * yPrev;
-    
-    xPrev = joystick.x;
-    yPrev = joystick.y;
-    ums3.setPixelColor(joystick.x/16, 0, joystick.y/16);
-    
-    // Send message via ESP-NOW
-    esp_err_t result = esp_now_send(broadcastAddress, (uint8_t *) &joystick, sizeof(joystick));    
+    // TODO: Send message via ESP-NOW.
+
   }
+
 }
