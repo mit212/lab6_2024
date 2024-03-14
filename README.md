@@ -29,6 +29,7 @@ Spring 2024[^1]
 In this lab, you will be working together as a small team to drive a mobile robot! Some parts of this lab can be performed in parallel, so feel free to skim through the handout and delegate to get through the lab faster.
 
 ## 1 Changing PlatformIO Environment
+Estimated time of completion: 5 min
 
 Clone this repository.
 
